@@ -41,7 +41,7 @@ my $socket = IO::Socket::SSL->new(
 # Login is automatic as usual when we provide User and Password
 my $client = Mail::IMAPClient->new(
    Socket   => $socket,
-   User     => 'perlkrv',       # Add username here
+   User     => 'username',      # Add username here
    Password => read_password,   # Read password from terminal
    #Password => 'userpassword', # Or just hard code it!
   )

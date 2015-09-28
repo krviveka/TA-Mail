@@ -76,6 +76,13 @@ foreach my $id (@messages) {
 
   my $str = $client->message_string($id)
     or die "$0: message_string: $@";
+  
+  #Get sender details:
+  my $messageFrom = $client->get_header( $id, "From" ); # "John Snow" <john.snow@gmail.com> or John Snow <john.snow@gmail.com>
+  my $Sender_Name = (split /</, $messageFrom)[0];
+  $Sender_Name =~ s/"//g;                               # Remove the " marks
+  (my $Sender_email) = $messageFrom =~ /<(.*)>/;        # Sender Mail-id format <john.snow@gmail.com>
+  print "This message is from: $Sender_Name with email-id: $Sender_email\n";
 
   my $n = 1;
   Email::MIME->new($str)->walk_parts(sub {
